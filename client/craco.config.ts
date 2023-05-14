@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'path'
 
 module.exports = {
   webpack: {
@@ -6,4 +6,4 @@ module.exports = {
       '@': path.resolve(__dirname, 'src'),
     },
   },
-};
+}

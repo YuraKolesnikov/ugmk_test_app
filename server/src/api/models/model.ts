@@ -1,7 +1,7 @@
 class Model {
-	async getData() {
-		return { lol: 'ping-pong' }
-	}
+  async getData() {
+    return { ping: 'pong' }
+  }
 }
 
 const model = new Model()
