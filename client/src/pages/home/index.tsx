@@ -1,9 +1,25 @@
+import { useCallback, useState } from 'react'
+/* import { useNavigate } from 'react-router' */
+
 import { PRODUCTS } from '@/shared/config/const'
-import { Select } from '@/shared/ui'
-import { useState } from 'react'
+import { BarChart, PieChart, Select } from '@/shared/ui'
 
 export const HomePage = () => {
   const [selectedProduct, onSelectProduct] = useState('')
+  /* const navigate = useNavigate() */
+
+  const handleBarClick = useCallback(
+    ({
+      columnIndex,
+      itemIndex,
+    }: {
+      columnIndex: number
+      itemIndex: number
+    }) => {
+      console.log({ columnIndex, itemIndex })
+    },
+    [],
+  )
 
   return (
     <section>
@@ -16,6 +32,8 @@ export const HomePage = () => {
         onChange={onSelectProduct}
         options={[{ id: '', title: 'All products' }, ...PRODUCTS]}
       />
+      <BarChart onBarClick={handleBarClick} />
+      <PieChart />
     </section>
   )
 }
