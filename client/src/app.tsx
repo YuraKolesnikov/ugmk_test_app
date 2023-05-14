@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 
+import { AppRouter } from './app/providers/router'
+
 const App = (): JSX.Element => {
   useEffect(() => {
     fetch('http://localhost:8000/api/', {
@@ -23,7 +25,7 @@ const App = (): JSX.Element => {
 
   return (
     <div className="app">
-      <h1>Hello from React</h1>
+      <AppRouter />
     </div>
   )
 }
