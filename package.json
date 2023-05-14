@@ -1,0 +1,60 @@
+{
+  "name": "ugmk_test_app",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "repository": "git@github.com:YuraKolesnikov/ugmk_test_app.git",
+  "author": "Yurii Kolenikov",
+  "license": "MIT",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "server": "yarn workspace @ugmk_test_app/server start:dev",
+    "client": "yarn workspace @ugmk_test_app/client start",
+    "start": "concurrently --kill-others-on-fail \"yarn server\"  \"yarn client\"",
+    "test:watch": "jest --watchAll --no-cache",
+    "test:api": "yarn workspace @ugmk_test_app/server test",
+    "test:client": "yarn workspace @ugmk_test_app/client test",
+    "test:ci": "jest",
+    "build-server": "yarn workspace @ugmk_test_app/server build",
+    "build-client": "yarn workspace @ugmk_test_app/client build",
+    "deploy": "concurrently --kill-others-on-fail \"yarn build-client\"  \"yarn server\"",
+    "type-check": "tsc --project tsconfig.json --pretty --noEmit",
+    "lint": "eslint --ext js,jsx,ts,tsx --fix --ignore-path .gitignore .",
+    "format": "prettier --ignore-path .gitignore \"src/**/*.+(ts|js|tsx|json|md)\" --write"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "17.3.0",
+    "@commitlint/config-conventional": "17.3.0",
+    "@types/jest": "29.2.5",
+    "@types/node": "18.11.18",
+    "@typescript-eslint/eslint-plugin": "5.48.0",
+    "@typescript-eslint/parser": "5.48.0",
+    "commitizen": "4.2.6",
+    "cz-conventional-changelog": "3.3.0",
+    "eslint": "8.31.0",
+    "eslint-config-prettier": "8.6.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-jest": "27.2.0",
+    "eslint-plugin-prettier": "4.2.1",
+    "husky": "8.0.2",
+    "jest": "29.3.1",
+    "lint-staged": "13.1.0",
+    "prettier": "2.8.1",
+    "typescript": "4.9.4"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "concurrently": "7.6.0"
+  },
+  "engines": {
+    "node": "16.16.0",
+    "npm": "8.11.0"
+  }
+}
