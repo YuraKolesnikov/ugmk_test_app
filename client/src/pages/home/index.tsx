@@ -1,12 +1,12 @@
 import { useCallback, useState } from 'react'
-/* import { useNavigate } from 'react-router' */
+import { useNavigate } from 'react-router'
 
 import { PRODUCTS } from '@/shared/config/const'
-import { BarChart, PieChart, Select } from '@/shared/ui'
+import { BarChart, Select } from '@/shared/ui'
 
 export const HomePage = () => {
   const [selectedProduct, onSelectProduct] = useState('')
-  /* const navigate = useNavigate() */
+  const navigate = useNavigate()
 
   const handleBarClick = useCallback(
     ({
@@ -17,23 +17,26 @@ export const HomePage = () => {
       itemIndex: number
     }) => {
       console.log({ columnIndex, itemIndex })
+      navigate(`/details/${columnIndex}/${itemIndex}`)
     },
     [],
   )
 
   return (
-    <section>
-      <h1>Home page</h1>
-      <p>Selected product: {selectedProduct}</p>
-      <Select
-        id="product"
-        name="product"
-        value={selectedProduct}
-        onChange={onSelectProduct}
-        options={[{ id: '', title: 'All products' }, ...PRODUCTS]}
-      />
-      <BarChart onBarClick={handleBarClick} />
-      <PieChart />
-    </section>
+    <>
+      <section className="max-w-3xl m-auto mb-10 flex items-center justify-end border-black p-4">
+        <Select
+          id="product"
+          name="product"
+          label="Фильтр по типу продукции"
+          value={selectedProduct}
+          onChange={onSelectProduct}
+          options={[{ id: '', title: 'All products' }, ...PRODUCTS]}
+        />
+      </section>
+      <section className="max-w-3xl m-auto">
+        <BarChart onBarClick={handleBarClick} />
+      </section>
+    </>
   )
 }
