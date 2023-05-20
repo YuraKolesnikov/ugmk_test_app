@@ -21,7 +21,7 @@ export const HomePage = () => {
           options={[{ id: '', title: 'All products' }, ...PRODUCTS]}
         />
       </section>
-      <section className="max-w-4xl m-auto">
+      <section className="max-w-4xl m-auto shadow-md shadow-slate-200">
         <BarChart data={filtered} onBarClick={handleBarClick} />
       </section>
     </>

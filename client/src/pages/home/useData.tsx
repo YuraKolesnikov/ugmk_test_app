@@ -59,7 +59,7 @@ export function useData(selectedProduct) {
       localStorage.setItem('factoryId', factories[factoryIndex])
       localStorage.setItem('factoryData', JSON.stringify(factoryData))
 
-      navigate(`/details/${factoryIndex}/${monthIndex}`)
+      navigate(`/details/${factories[factoryIndex]}/${monthIndex + 1}`)
     },
     [factories, filtered],
   )

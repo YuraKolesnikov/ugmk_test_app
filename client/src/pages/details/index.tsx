@@ -10,8 +10,16 @@ export const DetailsPage = () => {
     <>
       <section className="max-w-lg m-auto">
         <Link to="/">Back</Link>
-        <h1>Statistics for factory {factoryId}</h1>
-        <PieChart data={factoryData} />
+        {factoryData.length ? (
+          <>
+            <h1 className="font-bold text-center text-2xl mb-5">
+              Statistics for factory {factoryId}
+            </h1>
+            <PieChart data={factoryData} />
+          </>
+        ) : (
+          <p>No data</p>
+        )}
       </section>
     </>
   )

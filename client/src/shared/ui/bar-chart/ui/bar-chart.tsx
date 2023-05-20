@@ -71,6 +71,11 @@ export const BarChart: FC<IBarChartProps> = ({ data, onBarClick }) => {
               onBarClick({ columnIndex, itemIndex })
             }
           },
+          plugins: {
+            legend: {
+              position: 'bottom',
+            },
+          },
           responsive: true,
           maintainAspectRatio: true,
           scales: {
