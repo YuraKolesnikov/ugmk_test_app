@@ -34,7 +34,7 @@ export const HomePage = () => {
           options={[{ id: '', title: 'All products' }, ...PRODUCTS]}
         />
       </section>
-      <section className="max-w-3xl m-auto">
+      <section className="max-w-4xl m-auto">
         <BarChart onBarClick={handleBarClick} />
       </section>
     </>
