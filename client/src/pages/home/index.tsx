@@ -65,10 +65,19 @@ export const HomePage = () => {
       columnIndex: number
       itemIndex: number
     }) => {
-      console.log({ columnIndex, itemIndex })
-      navigate(`/details/${columnIndex}/${itemIndex}`)
+      const factoryIndex = columnIndex
+      const monthIndex = itemIndex
+      console.log(factories[factoryIndex])
+      const factory = data[itemIndex].factories[factories[factoryIndex]]
+      const factoryData = {
+        product1: factory.product1,
+        product2: factory.product2,
+        product3: factory.product3,
+      }
+      console.log({ factoryData })
+      navigate(`/details/${factoryIndex}/${monthIndex}`)
     },
-    [],
+    [factories, data],
   )
 
   return (
@@ -77,7 +86,7 @@ export const HomePage = () => {
         <Select
           id="product"
           name="product"
-          label="Фильтр по типу продукции"
+          label="Filter by product"
           value={selectedProduct}
           onChange={onSelectProduct}
           options={[{ id: '', title: 'All products' }, ...PRODUCTS]}
