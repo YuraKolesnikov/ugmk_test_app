@@ -58,7 +58,20 @@ export const BarChart: FC<IBarChartProps> = ({ onBarClick }) => {
 
   const chartData = useMemo<ChartData>(
     () => ({
-      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+      labels: [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
+      ],
       datasets: [
         {
           label: 'Dataset #1',
@@ -67,7 +80,7 @@ export const BarChart: FC<IBarChartProps> = ({ onBarClick }) => {
           borderWidth: 2,
           hoverBackgroundColor: 'rgba(244, 92, 99,0.4)',
           hoverBorderColor: 'rgba(244, 92, 99,1)',
-          data: [65, 59, 20, 81, 56, 55, 40],
+          data: [65, 59, 20, 81, 56, 55, 40, 20, 81, 56, 55, 15],
         },
         {
           label: 'Dataset #2',
@@ -76,7 +89,7 @@ export const BarChart: FC<IBarChartProps> = ({ onBarClick }) => {
           borderWidth: 2,
           hoverBackgroundColor: 'rgba(67, 101, 245,0.4)',
           hoverBorderColor: 'rgba(67, 101, 245,1)',
-          data: [40, 99, 57, 81, 56, 55, 40],
+          data: [40, 99, 57, 81, 56, 55, 40, 81, 56, 55, 40, 27],
         },
       ],
     }),
