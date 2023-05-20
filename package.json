@@ -14,16 +14,10 @@
     "server": "yarn workspace @ugmk_test_app/server start:dev",
     "client": "yarn workspace @ugmk_test_app/client start",
     "start": "concurrently --kill-others-on-fail \"yarn server\"  \"yarn client\"",
-    "test:watch": "jest --watchAll --no-cache",
-    "test:api": "yarn workspace @ugmk_test_app/server test",
-    "test:client": "yarn workspace @ugmk_test_app/client test",
-    "test:ci": "jest",
     "build-server": "yarn workspace @ugmk_test_app/server build",
     "build-client": "yarn workspace @ugmk_test_app/client build",
-    "deploy": "concurrently --kill-others-on-fail \"yarn build-client\"  \"yarn server\"",
-    "type-check": "tsc --project tsconfig.json --pretty --noEmit",
-    "lint": "eslint --ext js,jsx,ts,tsx --fix --ignore-path .gitignore .",
-    "format": "prettier --ignore-path .gitignore \"src/**/*.+(ts|js|tsx|json|md)\" --write"
+    "serve-client": "yarn workspace @ugmk_test_app/client serve",
+    "deploy": "concurrently --kill-others-on-fail \"yarn build-client\"  \"yarn server\" \"yarn serve-client\""
   },
   "devDependencies": {
     "@commitlint/cli": "17.3.0",
