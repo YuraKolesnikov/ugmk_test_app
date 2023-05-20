@@ -1,8 +1,10 @@
-export function useDetails() {
-  const factoryId = localStorage.getItem('factoryId')
-  const factoryData: number[] = localStorage.getItem('factoryData')
-    ? JSON.parse(localStorage.getItem('factoryData')!)
-    : []
+import { useSelector } from 'react-redux'
 
-  return { factoryId, factoryData }
+import { RootState } from '@/store'
+
+export function useDetails() {
+  return useSelector((store: RootState) => {
+    const { factoryId, factoryData } = store
+    return { factoryId, factoryData }
+  })
 }

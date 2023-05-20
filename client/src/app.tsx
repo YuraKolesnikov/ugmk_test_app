@@ -1,10 +1,15 @@
+import { Provider } from 'react-redux'
+
 import { AppRouter } from './app/providers/router'
+import { store } from './store'
 
 const App = (): JSX.Element => {
   return (
-    <div className="app">
-      <AppRouter />
-    </div>
+    <Provider store={store}>
+      <div className="app">
+        <AppRouter />
+      </div>
+    </Provider>
   )
 }
 

@@ -1,11 +1,27 @@
-import { useCallback, useEffect, useState, useMemo } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router'
+import { useDispatch, useSelector } from 'react-redux'
+
+import {
+  RootState,
+  setData,
+  setFactories,
+  setFactoryId,
+  setFactoryData,
+} from '@/store'
 
 import { MonthlyData } from './types'
 
 export function useData(selectedProduct) {
-  const [data, setData] = useState<MonthlyData[]>([])
-  const [factories, setFactories] = useState<string[]>([])
+  const dispatch = useDispatch()
+
+  const { data, factories } = useSelector((store: RootState) => {
+    const { data, factories } = store
+    return {
+      data,
+      factories,
+    }
+  })
 
   useEffect(() => {
     fetch('http://localhost:8000/api/', {
@@ -16,8 +32,8 @@ export function useData(selectedProduct) {
     })
       .then(res => res.json())
       .then(({ factories, products }) => {
-        setData(products)
-        setFactories(factories)
+        dispatch(setData(products))
+        dispatch(setFactories(factories))
       })
   }, [])
 
@@ -56,8 +72,8 @@ export function useData(selectedProduct) {
       const factory = data[itemIndex].factories[factories[factoryIndex]]
       const factoryData = [factory.product1, factory.product2, factory.product3]
 
-      localStorage.setItem('factoryId', factories[factoryIndex])
-      localStorage.setItem('factoryData', JSON.stringify(factoryData))
+      dispatch(setFactoryId(factories[factoryIndex]))
+      dispatch(setFactoryData(factoryData))
 
       navigate(`/details/${factories[factoryIndex]}/${monthIndex + 1}`)
     },
