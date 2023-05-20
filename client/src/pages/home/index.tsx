@@ -1,12 +1,61 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router'
 
 import { PRODUCTS } from '@/shared/config/const'
 import { BarChart, Select } from '@/shared/ui'
 
+interface FactoryData {
+  product1: number
+  product2: number
+  product3: number
+  sum: number
+}
+
+interface MonthlyData {
+  month: number
+  factories: { [factoryKey: string]: FactoryData }
+}
+
 export const HomePage = () => {
   const [selectedProduct, onSelectProduct] = useState('')
+  const [data, setData] = useState<MonthlyData[]>([])
+  const [factories, setFactories] = useState<string[]>([])
+
   const navigate = useNavigate()
+
+  useEffect(() => {
+    fetch('http://localhost:8000/api/', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(({ factories, products }) => {
+        setData(products)
+        setFactories(factories)
+      })
+  }, [])
+
+  const filtered = useMemo(() => {
+    const datasets: { label: string; data: number[] }[] = []
+    Object.keys(factories).forEach((f: string) => {
+      datasets.push({
+        label: `Factory ${+f + 1}`,
+        data: data.reduce((acc: number[], curr: MonthlyData) => {
+          const keyToSelect: string = !!selectedProduct
+            ? selectedProduct
+            : 'sum'
+
+          acc.push(curr.factories[factories[f]][keyToSelect])
+          return acc
+        }, []),
+      })
+    })
+    return datasets
+  }, [data, selectedProduct])
+
+  useEffect(() => console.log(filtered), [filtered])
 
   const handleBarClick = useCallback(
     ({
@@ -35,7 +84,7 @@ export const HomePage = () => {
         />
       </section>
       <section className="max-w-4xl m-auto">
-        <BarChart onBarClick={handleBarClick} />
+        <BarChart data={filtered} onBarClick={handleBarClick} />
       </section>
     </>
   )
