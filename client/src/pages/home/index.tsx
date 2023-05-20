@@ -39,6 +39,7 @@ export const HomePage = () => {
 
   const filtered = useMemo(() => {
     const datasets: { label: string; data: number[] }[] = []
+
     Object.keys(factories).forEach((f: string) => {
       datasets.push({
         label: `Factory ${+f + 1}`,
@@ -67,14 +68,13 @@ export const HomePage = () => {
     }) => {
       const factoryIndex = columnIndex
       const monthIndex = itemIndex
-      console.log(factories[factoryIndex])
+
       const factory = data[itemIndex].factories[factories[factoryIndex]]
-      const factoryData = {
-        product1: factory.product1,
-        product2: factory.product2,
-        product3: factory.product3,
-      }
-      console.log({ factoryData })
+      const factoryData = [factory.product1, factory.product2, factory.product3]
+
+      localStorage.setItem('factoryId', factories[factoryIndex])
+      localStorage.setItem('factoryData', JSON.stringify(factoryData))
+
       navigate(`/details/${factoryIndex}/${monthIndex}`)
     },
     [factories, data],
